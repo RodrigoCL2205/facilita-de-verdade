@@ -39,7 +39,7 @@
           </button>
         </div>
         <div class="header-info">
-          <div class="header-title">Data at Hand - Do Banco à Luz</div>
+          <div class="header-title">Facilita de Verdade</div>
 
         </div>
       </div>
@@ -54,7 +54,7 @@
               <div class="menu-container">
                 <div class="menu-panel">
                   <div class="menu-header">
-                    <div class="menu-title"><%= image_tag("") %><span>Data at Hand</span></div>
+                    <div class="menu-title"><%= image_tag("") %><span>facilita de Verdade</span></div>
                     <div class="menu-close">
                       <button class="br-button circle" type="button" aria-label="Fechar o menu" data-dismiss="menu" id="close-menu"><i class="fas fa-times" aria-hidden="true"></i>
                       </button>
@@ -63,11 +63,11 @@
                   <nav class="menu-body">
                     <%= link_to root_path, class: "menu-item" do %><span class="icon"><i class="fas fa-home" aria-hidden="true"></i></span><span class="content">Página Inicial</span><% end %>
                     <span class="br-divider horizontal mx-half mx-sm-1">
-                    <div class="menu-folder"><a class="menu-item text-decoration-none" href="javascript: void(0)"><span class="icon"><i class="fas fa-folder" aria-hidden="true"></i></span><span class="content">Indicadores</span></a>
+                    <div class="menu-folder"><a class="menu-item text-decoration-none" href="javascript: void(0)"><span class="icon"><i class="fas fa-folder" aria-hidden="true"></i></span><span class="content">Requerimentos</span></a>
                       <ul>
-                        <li><%= link_to "#", class: "menu-item" do %><span class="icon"><i class="fas fa-flask" aria-hidden="true"></i></span><span class="content">Amostras Processadas</span><% end %></li>
-                        <li><%= link_to "#", class: "menu-item" do %><span class="icon"><i class="fas fa-hourglass-half" aria-hidden="true"></i></span><span class="content">Desempenho Temporal</span><% end %></li>
-                        <li><%= link_to "#", class: "menu-item" do %><span class="icon"><i class="fas fa-check-square" aria-hidden="true"></i></span><span class="content">Ensaios Realizados</span><% end %></li>
+                        <li><%= link_to requeriments_path, class: "menu-item" do %><span class="icon"><i class="fas fa-flask" aria-hidden="true"></i></span><span class="content">Adicionar Requerimento</span><% end %></li>
+                        <li><%= link_to "#", class: "menu-item" do %><span class="icon"><i class="fas fa-hourglass-half" aria-hidden="true"></i></span><span class="content">#</span><% end %></li>
+                        <li><%= link_to "#", class: "menu-item" do %><span class="icon"><i class="fas fa-check-square" aria-hidden="true"></i></span><span class="content">#</span><% end %></li>
                       </ul>
                     </div>
                     <%= link_to "#", class: "menu-item" do %><span class="icon"><i class="fas fa-search" aria-hidden="true"></i></span><span class="content">Busca Personalizada</span><% end %></li>
