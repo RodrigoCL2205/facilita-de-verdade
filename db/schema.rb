@@ -10,10 +10,93 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_122057) do
+ActiveRecord::Schema.define(version: 2021_11_21_180328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "benefit_summaries", force: :cascade do |t|
+    t.bigint "benefit_id", null: false
+    t.date "issue_date"
+    t.string "number"
+    t.string "species"
+    t.date "der"
+    t.integer "despacho"
+    t.integer "motivo"
+    t.integer "motivo1"
+    t.integer "motivo2"
+    t.string "name"
+    t.string "sex"
+    t.date "birth_date"
+    t.string "nit"
+    t.string "cpf"
+    t.string "mothers_name"
+    t.integer "ra"
+    t.integer "ff"
+    t.date "dib"
+    t.date "dip"
+    t.date "datdd"
+    t.date "data_licenca"
+    t.integer "tipo_licenca"
+    t.date "dodr"
+    t.string "tempo_beneficio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["benefit_id"], name: "index_benefit_summaries_on_benefit_id"
+  end
+
+  create_table "benefits", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "insureds", force: :cascade do |t|
+    t.string "name"
+    t.string "cpf"
+    t.string "mothers_name"
+    t.date "birth_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requeriments", force: :cascade do |t|
+    t.integer "protocol"
+    t.date "der"
+    t.bigint "user_id", null: false
+    t.bigint "insured_id", null: false
+    t.bigint "benefit_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["benefit_id"], name: "index_requeriments_on_benefit_id"
+    t.index ["insured_id"], name: "index_requeriments_on_insured_id"
+    t.index ["user_id"], name: "index_requeriments_on_user_id"
+  end
+
+  create_table "rural_document_types", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "document"
+  end
+
+  create_table "rural_documents", force: :cascade do |t|
+    t.date "issue_date"
+    t.date "registration_date"
+    t.date "validity_start_date"
+    t.date "validity_end_date"
+    t.text "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "rural_document_type_id"
+    t.index ["rural_document_type_id"], name: "index_rural_documents_on_rural_document_type_id"
+  end
+
+  create_table "self_declarations", force: :cascade do |t|
+    t.string "type"
+    t.bigint "benefit_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["benefit_id"], name: "index_self_declarations_on_benefit_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +106,15 @@ ActiveRecord::Schema.define(version: 2021_11_17_122057) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "benefit_summaries", "benefits"
+  add_foreign_key "requeriments", "benefits"
+  add_foreign_key "requeriments", "insureds"
+  add_foreign_key "requeriments", "users"
+  add_foreign_key "rural_documents", "rural_document_types"
+  add_foreign_key "self_declarations", "benefits"
 end

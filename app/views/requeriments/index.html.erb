@@ -1,0 +1,22 @@
+<%= simple_form_for :query, url: requeriments_path, method: "get" do |f| %>
+  <div class="row">
+  <%= f.input_field :requerimento, as: :text, class: "form-control form-control-lg", html: { rows: "10" } %>
+  </div>
+  <%= f.submit "Importar", class: "btn btn-primary" %>
+<% end %>
+
+<h3>Requerimento</h3>
+<ul>
+  <li>Protocolo: <%= @protocolo %></li>
+  <li>DER: <%= @der %></li>
+</ul>
+
+<h3>Segurado "Insured"</h3>
+<ul>
+  <li>Nome: <%= @nome %> </li>
+  <li>CPF: <%= @cpf %></li>
+  <li>Nome da mãe: <%= @nome_mae %></li>
+  <li>Data de nascimento: <%= @data_nascimento %></li>
+</ul>
+
+<%= @query_requerimento %>

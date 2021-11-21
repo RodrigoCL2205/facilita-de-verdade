@@ -1,2 +1,53 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<%= simple_form_for :query, url: root_path, method: "get" do |f| %>
+  <div class="row">
+  <%= f.input_field :resumo, as: :text, class: "form-control form-control-lg", html: { rows: "10" } %>
+  </div>
+  <%= f.submit "Importar", class: "btn btn-primary" %>
+<% end %>
+
+<h3>Dados iniciais</h3>
+<ul>
+  <li>Data de emissão do resumo: <%= @data_emissao_resumo %></li>
+  <li>Beneficio: <%= @beneficio %></li>
+  <li>Especie: <%= @especie %></li>
+  <li>Tratamento: <%= @tratamento %></li>
+  <li>DER: <%= @der %></li>
+  <li>DRD: <%= @drd %></li>
+  <li>Orgão Concessor: <%= @orgao_concessor %></li>
+  <li>Orgão Mantenedor: <%= @orgao_mantenedor %></li>
+  <li>Despacho: <%= @despacho %></li>
+  <li>Motivo: <%= @motivo %></li>
+  <li>Motivo 1: <%= @motivo1 %></li>
+  <li>Motivo 2: <%= @motivo2 %></li>
+</ul>
+
+<H3>titular</H3>
+<ul>
+  <li>Nome Titular: <%= @nome %></li>
+  <li>Sexo: <%= @sexo %></li>
+  <li>Data de nascimento: <%= @data_nascimento %></li>
+  <li>NIT: <%= @nit %></li>
+  <li>CPF: <%= @cpf %></li>
+  <li>Nome da mãe: <%= @nome_mae %></li>
+</ul>
+
+<h3>Dados do Benefício</h3>
+<ul>
+  <li>R.A.: <%= @ra %></li>
+  <li>F.F.: <%= @ff %></li>
+  <li>DIB: <%= @dib %></li>
+  <li>DIP: <%= @dip %></li>
+  <li>DAT/DD: <%= @datdd %></li>
+  <li>Data Licença: <%= @data_licenca %></li>
+  <li>Tipo de licença: <%= @tipo_licenca %></li>
+  <li>D.O. / D.R.: <%= @dodr %></li>
+  <li>Tempo de serviço na DER: <%= @tempo_beneficio %></li>
+</ul>
+
+<%= @dados_beneficio.to_s.split("\n") %>
+
+<h3>Dados dos Dependentes</h3>
+<%= @dados_dependentes %>

@@ -6,6 +6,21 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+      <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&amp;display=swap"
+        />
+        <!-- DSGOV CSS-->
+        <link
+            rel="stylesheet"
+            href="node_modules\@govbr\dsgov\dist\dsgov.min.css"
+        />
+        <!-- Fontawesome-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+        />
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
@@ -13,9 +28,10 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <%= render 'shared/navbarDS' %>
     <%= render 'shared/flashes' %>
 
     <%= yield %>
   </body>
+  <%= javascript_pack_tag 'import_gov' %>
 </html>
