@@ -5,7 +5,7 @@ class CreateRequeriments < ActiveRecord::Migration[6.1]
       t.date :der
       t.references :user, null: false, foreign_key: true
       t.references :insured, null: false, foreign_key: true
-      t.references :benefit, null: false, foreign_key: true
+      t.references :benefit, null: true, foreign_key: true
 
       t.timestamps
     end

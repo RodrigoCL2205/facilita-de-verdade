@@ -1,0 +1,53 @@
+.menu {
+
+  position: relative;
+
+  > .menu-trigger {
+    display: inline-grid;
+    place-items: center;
+    padding: 0.5em;
+    border: 1px solid #CCC;
+    border-radius: 0.3em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+
+  }
+
+  > .menu-menu {
+    background: #EFEFEF;
+     border: 1px solid #CCC;
+    border-radius: 0.8em;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+    justify-content: center;
+    position: absolute;
+    width: 80%;
+    margin-top: 0.5em;
+    z-index: 100;
+
+  }
+
+  &[data-aberto="true"] {
+    > .menu-trigger > .fa-plus {
+      display: none;
+    }
+
+       > .menu-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+
+
+  &[data-aberto="false"] {
+    > .menu-trigger > .fa-minus {
+      display: none;
+    }
+
+    > .menu-menu {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s step-end;
+    }
+  }
+}

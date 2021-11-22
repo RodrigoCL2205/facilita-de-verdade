@@ -1,0 +1,78 @@
+
+  <div class="banner-sec bg-primary-darken-02 pt-2 pb-2">
+    <h2>Novo Requerimento</h2>
+  </div>
+
+  <div class="container mt-2">
+
+    <%# Início do menu e formulário de importação do Protocolo do GET %>
+    <div id="menu" class="menu m-2" data-aberto="false">
+      <span id="menu-trigger" class="menu-trigger">
+        <i class="fa fa-plus"></i>
+        <i class="fa fa-minus"></i>
+      </span>
+
+      <p><strong>Importar campos do Protocolo do GET:</strong> </p>
+
+      <div class="menu-menu form-group">
+        <h6>Copia o a primeira página do processo emitido pelo GET e cole abaixo:</h6>
+
+        <%= simple_form_for :query, url: new_requeriment_path, method: "get" do |f| %>
+          <div class="mb-2">
+          <%= f.input_field :requerimento, as: :text, class: "form-control col-lg-12" %>
+          </div>
+          <%= f.submit "Importar", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Início Form para criar requerimento @requeriment %>
+    <div class="row justify-content-center m-3">
+      <div class="col-12 col-sm-10">
+        <div class="form-group">
+          <%= simple_form_for (@requeriment) do |f| %>
+
+              <div class="row justify-content-between">
+                <div class="mb-3 col-3">
+                  <%= f.label :status, label: "Protocolo: ", required: false %>
+                  <%= f.input :protocol, class:"form-control", label: false, input_html: { type: "text", value: @protocolo.to_s } %>
+                </div>
+
+                <div class="mb-3 col-3">
+                  <%= f.label :status, label: "DER: ", required: false %>
+                  <%= f.input :der, as: :string, label: false, input_html: { class: "datepicker", value: @der.to_s } %>
+                </div>
+
+                <div class="mb-3 col-3">
+                  <%= f.label :status, label: "CPF: ", required: false %>
+                  <%= f.input :cpf, class:"form-control", label: false, input_html: { type: "text", value: @cpf.to_s } %>
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="mb-3 col-8">
+                  <%= f.label :status, label: "Nome: ", required: false %>
+                  <%= f.input :name, class:"form-control", label: false, input_html: { type: "text", value: @nome.to_s } %>
+                </div>
+
+                <div class="mb-3 col-3">
+                  <%= f.label :status, label: "Data de Nascimento: ", required: false %>
+                  <%= f.input :birth_date, as: :string, label: false, input_html: { class: "datepicker", value: @data_nascimento.to_s } %>
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="mb-3 col-8">
+                  <%= f.label :status, label: "Nome da Mãe: ", required: false %>
+                  <%= f.input :mothers_name, class:"form-control", label: false, input_html: { type: "text", value: @nome_mae.to_s } %>
+                </div>
+              </div>
+
+              <div class="form-actions">
+              <%= f.button :submit, "Criar Requerimento", class: "br-button secondary mt-3 mt-sm-0" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

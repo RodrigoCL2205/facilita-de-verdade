@@ -11,10 +11,7 @@
             href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&amp;display=swap"
         />
         <!-- DSGOV CSS-->
-        <link
-            rel="stylesheet"
-            href="node_modules\@govbr\dsgov\dist\dsgov.min.css"
-        />
+
         <!-- Fontawesome-->
         <link
             rel="stylesheet"
@@ -28,10 +25,14 @@
   </head>
 
   <body>
+    <div class="template-base">
     <%= render 'shared/navbarDS' %>
     <%= render 'shared/flashes' %>
 
-    <%= yield %>
+      <%= yield %>
+
+  <%= render "shared/footer" %>
+  </div>
   </body>
   <%= javascript_pack_tag 'import_gov' %>
 </html>

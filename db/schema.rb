@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_11_21_180328) do
     t.date "der"
     t.bigint "user_id", null: false
     t.bigint "insured_id", null: false
-    t.bigint "benefit_id", null: false
+    t.bigint "benefit_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["benefit_id"], name: "index_requeriments_on_benefit_id"
