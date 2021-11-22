@@ -1,7 +1,30 @@
-  <div class="banner-sec bg-primary-darken-02 pt-2 pb-2">
+  <div class="banner-sec bg-primary-darken-02 ">
     <h2>Meus Requerimentos</h2>
   </div>
 
 <div class="container mt-2">
-
+     <div id="table">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+          <th>Protocolo</th>
+          <th>Titular</th>
+          <th>DER</th>
+          <th>Serviço</th>
+          <th>Status</th>
+      </tr>
+      </thead>
+      <tbody id="tbody">
+        <% @requeriments.each do |requeriment| %>
+          <tr>
+            <td><%= requeriment.protocol %></td>
+            <td><%= requeriment.insured.name %></td>
+            <td><%= requeriment.der.strftime('%d/%m/%Y') %></td>
+            <td><%= requeriment.servico %></td>
+            <td><%= requeriment.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

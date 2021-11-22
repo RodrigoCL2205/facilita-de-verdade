@@ -1,5 +1,5 @@
 
-  <div class="banner-sec bg-primary-darken-02 pt-2 pb-2">
+  <div class="banner-sec bg-primary-darken-02">
     <h2>Novo Requerimento</h2>
   </div>
 
@@ -33,38 +33,50 @@
           <%= simple_form_for (@requeriment) do |f| %>
 
               <div class="row justify-content-between">
-                <div class="mb-3 col-3">
-                  <%= f.label :status, label: "Protocolo: ", required: false %>
+                <div class="mb-1 col-2">
+                  <%= f.label :protocol, label: "Protocolo: ", required: false %>
                   <%= f.input :protocol, class:"form-control", label: false, input_html: { type: "text", value: @protocolo.to_s } %>
                 </div>
 
-                <div class="mb-3 col-3">
-                  <%= f.label :status, label: "DER: ", required: false %>
+                <div class="mb-1 col-2">
+                  <%= f.label :der, label: "DER: ", required: false %>
                   <%= f.input :der, as: :string, label: false, input_html: { class: "datepicker", value: @der.to_s } %>
                 </div>
 
-                <div class="mb-3 col-3">
-                  <%= f.label :status, label: "CPF: ", required: false %>
-                  <%= f.input :cpf, class:"form-control", label: false, input_html: { type: "text", value: @cpf.to_s } %>
+                <%# Status - falta incluir importação %>
+                <div class="mb-1 col-3">
+                  <%= f.label :status, label: "Status: ", required: false %>
+                  <%= f.input :status, class:"form-control", label: false, input_html: { type: "text", value: @status.to_s } %>
+                </div>
+
+                <%# Espécie - falta incluir importação %>
+                <div class="mb-1 col-4">
+                  <%= f.label :servico, label: "Serviço: ", required: false %>
+                  <%= f.input :servico, class:"form-control", label: false, input_html: { type: "text", value: @servico.to_s } %>
                 </div>
               </div>
 
               <div class="row justify-content-between">
-                <div class="mb-3 col-8">
-                  <%= f.label :status, label: "Nome: ", required: false %>
+                <div class="mb-1 col-8">
+                  <%= f.label :name, label: "Nome: ", required: false %>
                   <%= f.input :name, class:"form-control", label: false, input_html: { type: "text", value: @nome.to_s } %>
                 </div>
 
-                <div class="mb-3 col-3">
-                  <%= f.label :status, label: "Data de Nascimento: ", required: false %>
+                <div class="mb-1 col-3">
+                  <%= f.label :birth_date, label: "Data de Nascimento: ", required: false %>
                   <%= f.input :birth_date, as: :string, label: false, input_html: { class: "datepicker", value: @data_nascimento.to_s } %>
                 </div>
               </div>
 
               <div class="row justify-content-between">
-                <div class="mb-3 col-8">
-                  <%= f.label :status, label: "Nome da Mãe: ", required: false %>
+                <div class="mb-1 col-8">
+                  <%= f.label :mothers_name, label: "Nome da Mãe: ", required: false %>
                   <%= f.input :mothers_name, class:"form-control", label: false, input_html: { type: "text", value: @nome_mae.to_s } %>
+                </div>
+
+                <div class="mb-1 col-3">
+                  <%= f.label :cpf, label: "CPF: ", required: false %>
+                  <%= f.input :cpf, class:"form-control", label: false, input_html: { type: "text", value: @cpf.to_s } %>
                 </div>
               </div>
 
