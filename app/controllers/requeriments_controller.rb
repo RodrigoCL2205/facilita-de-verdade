@@ -1,14 +1,15 @@
 class RequerimentsController < ApplicationController
+  before_action :set_requeriment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @requeriments = Requeriment.all
+    @requeriments = policy_scope(Requeriment).order(created_at: :desc)
 
   end
 
   def new
     @requeriment = Requeriment.new
-
     import_query_requerimento
+    authorize @requeriment
   end
 
   def create
@@ -18,15 +19,33 @@ class RequerimentsController < ApplicationController
     @requeriment.insured = @insured
     @requeriment.user = current_user
 
+    authorize @requeriment
     if @requeriment.save
       redirect_to requeriments_path, notice: "Requerimento criado com sucesso."
     else
       render :new
     end
+  end
+
+  def edit
 
   end
 
+  def update
+
+  end
+
+  def destroy
+    @requeriment.destroy
+    redirect_to requeriments_path, notice: "Requerimento foi deletado."
+  end
+
   private
+
+  def set_requeriment
+    @requeriment = Requeriment.find(params[:id])
+    authorize @requeriment
+  end
 
   def requeriment_params
     params.require(:requeriment).permit(:protocol, :der, :status, :servico)

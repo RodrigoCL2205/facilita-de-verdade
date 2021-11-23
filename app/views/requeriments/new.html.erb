@@ -7,21 +7,28 @@
 
     <%# Início do menu e formulário de importação do Protocolo do GET %>
     <div id="menu" class="menu m-2" data-aberto="false">
-      <span id="menu-trigger" class="menu-trigger">
-        <i class="fa fa-plus"></i>
-        <i class="fa fa-minus"></i>
-      </span>
+      <div class="form-inline justify-content-center">
 
-      <p><strong>Importar campos do Protocolo do GET:</strong> </p>
-
+        <span id="menu-trigger" class="menu-trigger">
+          <p class="br-button secondary ml-3 mt-3 mt-sm-0 text-decoration-none">Importar Campos do GET</p>
+        </span>
+      </div>
       <div class="menu-menu form-group">
-        <h6>Copia o a primeira página do processo emitido pelo GET e cole abaixo:</h6>
-
+        <div>
+          <strong><p class="text-center mt-3">Copia a primeira página do processo emitido pelo GET e cole abaixo:</p></strong>
+        </div>
         <%= simple_form_for :query, url: new_requeriment_path, method: "get" do |f| %>
-          <div class="mb-2">
-          <%= f.input_field :requerimento, as: :text, class: "form-control col-lg-12" %>
+          <div class="mb-2 br-textarea">
+            <%= f.input_field :requerimento, as: :text, class: "textarea-id1 col-lg-12", id: "menu-text-area", placeholder: "Copie a partir da palavra 'INSS' até o quadro do QR Code." %>
           </div>
-          <%= f.submit "Importar", class: "btn btn-primary" %>
+          <div class="d-flex justify-content-between">
+            <%= button_tag type: 'submit', class: "br-button secondary mt-3 mt-sm-0 text-decoration-none" do %>
+              <i class="fas fa-user" aria-hidden="true"></i>Importar
+            <% end %>
+
+            <button class="br-button secondary mt-3 mt-sm-0" type="button" id="fechar"><i class="fas fa-times" aria-hidden="true"></i>Fechar
+            </button>
+          </div>
         <% end %>
       </div>
     </div>

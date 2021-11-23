@@ -3,16 +3,22 @@
   </div>
 
 <div class="container mt-2">
-     <div id="table">
+
+  <div class="mb-2">
+    <%= link_to "Novo Requerimento", new_requeriment_path, class: "br-button secondary mt-3 mt-sm-0 text-decoration-none" %>
+  </div>
+
+  <div id="table">
     <table class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
+      <thead class="thead-dark">
+        <tr>
           <th>Protocolo</th>
           <th>Titular</th>
           <th>DER</th>
           <th>Serviço</th>
           <th>Status</th>
-      </tr>
+          <th colspan="2">Ações</th>
+        </tr>
       </thead>
       <tbody id="tbody">
         <% @requeriments.each do |requeriment| %>
@@ -22,6 +28,21 @@
             <td><%= requeriment.der.strftime('%d/%m/%Y') %></td>
             <td><%= requeriment.servico %></td>
             <td><%= requeriment.status %></td>
+
+            <td>
+              <% if policy(requeriment).edit? %>
+                <%= link_to edit_requeriment_path(requeriment), class: "text-primary" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+              <% end %>
+
+              <% if policy(requeriment).destroy? %>
+                <%= link_to requeriment_path(requeriment), method: :delete, class: "text-danger",data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              <% end %>
+            </td>
+
           </tr>
         <% end %>
       </tbody>
