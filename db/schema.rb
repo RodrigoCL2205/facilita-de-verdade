@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_212657) do
+ActiveRecord::Schema.define(version: 2021_11_24_212134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(version: 2021_11_22_212657) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "rural_document_type_id"
     t.index ["rural_document_type_id"], name: "index_rural_documents_on_rural_document_type_id"
+  end
+
+  create_table "score_for_services", force: :cascade do |t|
+    t.string "servico"
+    t.string "status"
+    t.boolean "antecipa"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "conclusao"
+    t.float "exigencia"
+    t.float "subtarefa"
   end
 
   create_table "self_declarations", force: :cascade do |t|

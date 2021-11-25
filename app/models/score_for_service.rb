@@ -1,0 +1,2 @@
+class ScoreForService < ApplicationRecord
+end

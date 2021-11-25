@@ -6,19 +6,23 @@ class RequerimentsController < ApplicationController
 
   end
 
+  def show
+    @requeriment = Requeriment.find(params[:id])
+  end
+
   def new
     @requeriment = Requeriment.new
     import_query_requerimento
+    import_names_collection
     authorize @requeriment
   end
 
   def create
     @requeriment = Requeriment.new(requeriment_params)
-    @insured = Insured.new(insured_params)
-    @insured.save
+    create_or_find_insured
+
     @requeriment.insured = @insured
     @requeriment.user = current_user
-
     authorize @requeriment
     if @requeriment.save
       redirect_to requeriments_path, notice: "Requerimento criado com sucesso."
@@ -55,6 +59,16 @@ class RequerimentsController < ApplicationController
     params.require(:requeriment).permit(:name, :cpf, :mothers_name, :birth_date)
   end
 
+  def create_or_find_insured
+    if Insured.where(cpf: params[:requeriment][:cpf]) == []
+      @insured = Insured.new(insured_params)
+      @insured.save
+    else
+      @insured = Insured.where(cpf: params[:requeriment][:cpf]).first
+    end
+    @insured
+  end
+
   def import_query_requerimento
     @query_requerimento = ""
     if params[:query].present?
@@ -73,8 +87,14 @@ class RequerimentsController < ApplicationController
       @nome = @interessado.match(/(?<=\d{3}.\d{3}.\d{3}-\d{2})(.|\n)*(?= \d{2}\/\d{2}\/\d{4})/)
       @nome_mae = @interessado.match(/(?<=\d{2}\/\d{2}\/\d{4})(.|\n)*/)
 
-      @servico = @query_requerimento.match(/(?<=Canal de atendimento\r\n)(.|\n)*(?=\r\nAGÊNCIA)/)
+      @servico = @query_requerimento.match(/(?<=Canal de atendimento\r\n).*(?=\n)/)
+
       @status = @query_requerimento.match(/(Pendente)|(Cancelada)|(Concluída)|(Exigência)/)
     end
+  end
+
+  def import_names_collection
+    @collection_all_services = ScoreForService.all.order("servico ASC").distinct.pluck(:servico)
+    @collection_all_status = ["Pendente", "Exigência", "Concluída", "Cancelada"]
   end
 end

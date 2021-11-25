@@ -5,7 +5,7 @@
 <div class="container mt-2">
 
   <div class="mb-2">
-    <%= link_to "Novo Requerimento", new_requeriment_path, class: "br-button secondary mt-3 mt-sm-0 text-decoration-none" %>
+    <%= link_to "Novo Requerimento", new_requeriment_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
   </div>
 
   <div id="table">
@@ -23,7 +23,11 @@
       <tbody id="tbody">
         <% @requeriments.each do |requeriment| %>
           <tr>
-            <td><%= requeriment.protocol %></td>
+            <td>
+              <%= link_to requeriment_path(requeriment) do %>
+                <%= requeriment.protocol %>
+              <% end %>
+            </td>
             <td><%= requeriment.insured.name %></td>
             <td><%= requeriment.der.strftime('%d/%m/%Y') %></td>
             <td><%= requeriment.servico %></td>

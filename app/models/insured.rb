@@ -1,4 +1,4 @@
 class Insured < ApplicationRecord
-  belongs_to :requeriment, optional: true
+  has_many :requeriments
 
 end

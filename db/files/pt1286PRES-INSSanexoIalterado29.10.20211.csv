@@ -1,0 +1,73 @@
+Serviços Ceab/RD,Conclusão,Exigência,Subtarefa,Antecipação
+Acerto para Integração Sibe,0.75,0.2,0,false
+Acertos para Análise,0.75,0.2,0.2,false
+Acertos para Marcação de Perícia Médica,0.3,0.05,0,false
+Aeronauta Gestante – Auxílio-Doença,0.75,0.2,0,false
+Alteração de DER/DPR,0.1,0,0,false
+Antecipação de benefício assistencial (B16),0.8,0,0,false
+Aposentadoria da Pessoa com Deficiência,1.45,0.2,0.8,true
+Aposentadoria da Pessoa com Deficiência por Idade,1,0.2,0.8,true
+Aposentadoria da Pessoa com Deficiência por Tempo de Contribuição,1.45,0.2,0.8,true
+Aposentadoria por Idade Rural,1.05,0.2,0.2,false
+Aposentadoria por Idade Urbana,1,0.2,0.2,false
+Aposentadoria por Idade Urbana - Meu INSS,1,0.2,0.2,false
+Aposentadoria por Tempo de Contribuição,1.45,0.2,0.2,false
+Auxílio-Acidente,0.33,0.05,0,false
+Auxílio-Doença – Rural (Acerto Pós-perícia),0.5,0.2,0,false
+Auxílio-Doença – Urbano (Acerto Pós-perícia),0.33,0.2,0,false
+Auxílio-Doença com Documento Médico,0.6,0.2,0,false
+Auxílio-Reclusão Rural,0.95,0.2,0,false
+Auxílio-Reclusão Urbano,0.95,0.2,0,false
+Benefício Assistencial à Pessoa com Deficiência,1.05,0.2,0.8,true
+Benefício Assistencial à Pessoa com Deficiência – Microcefalia,1.05,0.2,0.8,true
+Benefício Assistencial ao Idoso,1.05,0.2,0,false
+Benefício Assistencial ao Trabalhador Portuário Avulso,1.05,0.2,0.8,true
+Cancelar Certidão de Tempo de Contribuição,0.24,0,0,false
+Certidão de Tempo de Contribuição,1.17,0.2,0.2,false
+Compensação Previdenciária – Comprev-RI,1,0.2,0.2,false
+Compensação Previdenciária - Comprev-RI Integrado,1,0.2,0.2,false
+Compensação Previdenciária – Comprev-RO,1,0.2,0.2,false
+Cumprimento de Acórdão com Implantação de Benefício,1,0.2,0.2,false
+Cumprimento de Acórdão com Implantação de Benefício/BI,0.75,0.2,0.2,false
+Cumprimento de Acórdão com Implantação de Benefício/Defeso,0.33,0.2,0.2,false
+Cumprimento de Acórdão com Implantação de Benefício/Loas,0.75,0.2,0.2,false
+Cumprimento de Acórdão de Apuração de Irregularidade – MOB,0.5,0.2,0.2,false
+Cumprimento de Acórdão sem Implantação de Benefício,0.5,0,0,false
+Emissão de Certidão de Tempo de Contribuição – CTC,0.25,0,0,false
+Envio de Documentos para Auxílio-Doença Rural Exigências do Ente – Comprev-RI,0.5,0,0,false
+Instrução de Processo de Recurso,0.4,0,0,false
+Monitorar e Acompanhar o Processamento de Tarefas de SD,0.5,0,0,false
+Pecúlio,1,0,0,false
+Pedido de prorrogação com documento médico,0.15,0,0,false
+Pendências Administrativas Sabi,0.33,0.2,0,false
+Pensão Especial – Crianças com Síndrome Congênita do Zika Vírus,0.75,0.2,0.2,false
+Pensão Especial – Síndrome da Talidomida,0.75,0.2,0.2,false
+Pensão por Morte Rural,0.95,0.2,0.2,false
+Pensão por Morte Urbana,0.95,0.2,0.2,false
+Recurso – Cumprimento de Diligência,0.75,0.2,0.2,false
+Recurso – Entidade Conveniada,0.4,0.2,0.2,false
+Recurso - Seguro Defeso,0.4,0.2,0.2,false
+Recurso de Benefício por Incapacidade,0.4,0.2,0.2,false
+Recurso de Benefício por Incapacidade – Entidade Conveniada,0.4,0.2,0.2,false
+Recurso de Seguro Defeso - Entidade Conveniada,0.4,0.2,0.2,false
+Recurso Especial - Entidade Conveniada,0.5,0.2,0.2,false
+Recurso Ordinário (1ª instância),0.4,0.2,0.2,false
+Reemitir Parcelas – Seguro Defeso,0.22,0.03,0,false
+Requerimento de Antecipação de Pagamento da Revisão do Art. 29,0.33,0,0,false
+Revisão,1.45,0.2,0.2,false
+Revisão – Entidade Conveniada,1.45,0.2,0.2,false
+Revisão Administrativa de Benefício por Incapacidade,1.45,0.2,0.2,false
+Revisão Administrativa em Fase Recursal,0.75,0.2,0.2,false
+Revisão de Auxílio Doença com Documento Médico,0.45,0.2,0,false
+Revisão de Certidão de Tempo de Tempo de Contribuição,1.45,0.2,0.2,false
+Revisão de Ofício,1.45,0.2,0.2,false
+Revisão Extraordinária,1.45,0.2,0.2,false
+Revisão Legado,1.45,0.2,0.2,false
+Revisão para Comprev,1.45,0.2,0.2,false
+Salário-Maternidade Rural,0.75,0.2,0.2,false
+Salário-Maternidade Urbano,0.75,0.2,0.2,false
+Seguro Defeso – Pescador Artesanal,0.22,0.03,0,false
+Seguro Defeso – Protocolo em Contingência,0.22,0.03,0,false
+Solicitação de Perícia Hospitalar ou Domiciliar,0.2,0,0,false
+Solicitar Contestação de NTEP,0.33,0,0,false
+Solicitar Recurso de NTEP,0.2,0,0,false

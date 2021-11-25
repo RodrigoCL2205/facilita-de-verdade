@@ -10,20 +10,20 @@
       <div class="form-inline justify-content-center">
 
         <span id="menu-trigger" class="menu-trigger">
-          <p class="br-button secondary ml-3 mt-3 mt-sm-0 text-decoration-none">Importar Campos do GET</p>
+          <p class="br-button primary ml-3 mt-3 mt-sm-0 text-decoration-none">Importar Campos do GET</p>
         </span>
       </div>
       <div class="menu-menu form-group">
         <div>
           <strong><p class="text-center mt-3">Copia a primeira página do processo emitido pelo GET e cole abaixo:</p></strong>
         </div>
-        <%= simple_form_for :query, url: new_requeriment_path, method: "get" do |f| %>
+        <%= simple_form_for :query, url: import_path, method: "post" do |f| %>
           <div class="mb-2 br-textarea">
             <%= f.input_field :requerimento, as: :text, class: "textarea-id1 col-lg-12", id: "menu-text-area", placeholder: "Copie a partir da palavra 'INSS' até o quadro do QR Code." %>
           </div>
           <div class="d-flex justify-content-between">
-            <%= button_tag type: 'submit', class: "br-button secondary mt-3 mt-sm-0 text-decoration-none" do %>
-              <i class="fas fa-user" aria-hidden="true"></i>Importar
+            <%= button_tag type: 'submit', class: "br-button primary mt-3 mt-sm-0 text-decoration-none" do %>
+              <i class="fas fa-file-import" aria-hidden="true"></i>Importar
             <% end %>
 
             <button class="br-button secondary mt-3 mt-sm-0" type="button" id="fechar"><i class="fas fa-times" aria-hidden="true"></i>Fechar
@@ -42,53 +42,53 @@
               <div class="row justify-content-between">
                 <div class="mb-1 col-2">
                   <%= f.label :protocol, label: "Protocolo: ", required: false %>
-                  <%= f.input :protocol, class:"form-control", label: false, input_html: { type: "text", value: @protocolo.to_s } %>
+                  <%= f.input :protocol, class:"form-control", label: false, input_html: { type: "text", value: @protocolo.to_s.strip } %>
                 </div>
 
                 <div class="mb-1 col-2">
                   <%= f.label :der, label: "DER: ", required: false %>
-                  <%= f.input :der, as: :string, label: false, input_html: { class: "datepicker", value: @der.to_s } %>
+                  <%= f.input :der, as: :string, label: false, input_html: { class: "datepicker", value: @der.to_s.strip } %>
                 </div>
 
                 <%# Status - falta incluir importação %>
                 <div class="mb-1 col-3">
                   <%= f.label :status, label: "Status: ", required: false %>
-                  <%= f.input :status, class:"form-control", label: false, input_html: { type: "text", value: @status.to_s } %>
+                  <%= f.input :status, class:"form-control", label: false, collection: @collection_all_status, selected: @status.to_s.strip, prompt: "", input_html: { type: "text" } %>
                 </div>
 
                 <%# Espécie - falta incluir importação %>
                 <div class="mb-1 col-4">
                   <%= f.label :servico, label: "Serviço: ", required: false %>
-                  <%= f.input :servico, class:"form-control", label: false, input_html: { type: "text", value: @servico.to_s } %>
+                  <%= f.input :servico, class:"form-control", label: false, collection: @collection_all_services, selected: @servico.to_s.strip, prompt: "", input_html: { type: "text" } %>
                 </div>
               </div>
-
+              Serviço: <%= @servico %>
               <div class="row justify-content-between">
                 <div class="mb-1 col-8">
                   <%= f.label :name, label: "Nome: ", required: false %>
-                  <%= f.input :name, class:"form-control", label: false, input_html: { type: "text", value: @nome.to_s } %>
+                  <%= f.input :name, class:"form-control", label: false, input_html: { type: "text", value: @nome.to_s.strip } %>
                 </div>
 
                 <div class="mb-1 col-3">
                   <%= f.label :birth_date, label: "Data de Nascimento: ", required: false %>
-                  <%= f.input :birth_date, as: :string, label: false, input_html: { class: "datepicker", value: @data_nascimento.to_s } %>
+                  <%= f.input :birth_date, as: :string, label: false, input_html: { class: "datepicker", value: @data_nascimento.to_s.strip } %>
                 </div>
               </div>
 
               <div class="row justify-content-between">
                 <div class="mb-1 col-8">
                   <%= f.label :mothers_name, label: "Nome da Mãe: ", required: false %>
-                  <%= f.input :mothers_name, class:"form-control", label: false, input_html: { type: "text", value: @nome_mae.to_s } %>
+                  <%= f.input :mothers_name, class:"form-control", label: false, input_html: { type: "text", value: @nome_mae.to_s.strip } %>
                 </div>
 
                 <div class="mb-1 col-3">
                   <%= f.label :cpf, label: "CPF: ", required: false %>
-                  <%= f.input :cpf, class:"form-control", label: false, input_html: { type: "text", value: @cpf.to_s } %>
+                  <%= f.input :cpf, class:"form-control", label: false, input_html: { type: "text", value: @cpf.to_s.strip } %>
                 </div>
               </div>
 
               <div class="form-actions">
-              <%= f.button :submit, "Criar Requerimento", class: "br-button secondary mt-3 mt-sm-0" %>
+              <%= f.button :submit, "Criar Requerimento", class: "br-button primary mt-3 mt-sm-0" %>
             </div>
           <% end %>
         </div>

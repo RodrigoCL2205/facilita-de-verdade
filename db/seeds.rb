@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
+require 'csv'
 
 puts "Cleaning all Rural Document Types!"
 RuralDocumentType.destroy_all
@@ -57,3 +59,30 @@ documentos_rurais.each do |element|
   puts "Created RuralDocumentType id: #{document.id}."
 end
 puts "Finished Creation."
+
+# Creating seed of the Score For Services
+
+puts "Destroying all Score For Services!"
+ScoreForService.destroy_all
+puts "All Score For Services destroyed."
+
+puts "Creating Seed of Score For Services!"
+
+csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
+filepath    = File.dirname(__FILE__) + "/files/pt1286PRES-INSSanexoIalterado29.10.20211.csv"
+
+CSV.foreach(filepath, csv_options) do |row|
+  # puts "Creating new Service"
+   puts row
+  score = ScoreForService.new(
+    servico: row['Serviços Ceab/RD'].strip,
+    conclusao: row['Conclusão'].strip.to_f,
+    exigencia: row['Exigência'].strip.to_f,
+    subtarefa: row['Subtarefa'].strip.to_f,
+    antecipa: row['Antecipação']
+  )
+  score.save!
+   puts "Serviço: #{score.servico} | Conclusão: #{score.conclusao} | Exigência: #{score.exigencia} | Subtarefa: #{score.subtarefa} | Antecipa: #{score.antecipa}"
+   # puts "Created Service #{score.id}."
+end
+puts "All Services updated!"
