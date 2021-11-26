@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_212134) do
+ActiveRecord::Schema.define(version: 2021_11_26_154043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,19 @@ ActiveRecord::Schema.define(version: 2021_11_24_212134) do
     t.float "subtarefa"
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.bigint "requeriment_id", null: false
+    t.string "servico"
+    t.string "status"
+    t.float "score"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "work_period_id", null: false
+    t.index ["requeriment_id"], name: "index_scores_on_requeriment_id"
+    t.index ["work_period_id"], name: "index_scores_on_work_period_id"
+  end
+
   create_table "self_declarations", force: :cascade do |t|
     t.string "type"
     t.bigint "benefit_id", null: false
@@ -124,10 +137,22 @@ ActiveRecord::Schema.define(version: 2021_11_24_212134) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "work_periods", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "program"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_work_periods_on_user_id"
+  end
+
   add_foreign_key "benefit_summaries", "benefits"
   add_foreign_key "requeriments", "benefits"
   add_foreign_key "requeriments", "insureds"
   add_foreign_key "requeriments", "users"
   add_foreign_key "rural_documents", "rural_document_types"
+  add_foreign_key "scores", "requeriments"
+  add_foreign_key "scores", "work_periods"
   add_foreign_key "self_declarations", "benefits"
 end

@@ -1,4 +1,4 @@
-<header class="br-header small " data-sticky>
+<header class="br-header small" id="header" data-sticky	>
   <div class="container-lg">
     <div class="header-top">
       <div class="header-logo">
@@ -7,64 +7,67 @@
         <% end %>
       </div>
       <div class="header-actions">
-
-              <div class="header-links dropdown">
-                <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido"><i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                </button>
-                <div class="br-list">
-                  <div class="header">
-                    <div class="title">Acesso Rápido</div>
-                  </div><%= link_to "Adcionar Requerimento", new_requeriment_path, class: "br-item" %><%= link_to "Meus Requerimentos", requeriments_path, class: "br-item" %><a class="br-item" href="javascript:void(0)">Controle de Meta</a>
-                </div>
-              </div>
-                <!--
-              <span class="br-divider vertical mx-half mx-sm-1"></span>
-              <div class="header-functions dropdown">
-                <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema"><i class="fas fa-th" aria-hidden="true"></i>
-                </button>
-                <div class="br-list">
-                  <div class="header">
-                    <div class="title">Funcionalidades do Sistema</div>
-                  </div>
-                  <div class="align-items-center br-item">
-                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 1"><i class="fas fa-chart-bar" aria-hidden="true" alt="Controle da Meta"></i><span class="text">Controle da Meta</span>
-                    </button>
-                  </div>
-                  <div class="align-items-center br-item">
-                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 2"><i class="fas fa-headset" aria-hidden="true"></i><span class="text">Funcionalidade 2</span>
-                    </button>
-                  </div>
-                  <div class="align-items-center br-item">
-                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 3"><i class="fas fa-comment" aria-hidden="true"></i><span class="text">Funcionalidade 3</span>
-                    </button>
-                  </div>
-                  <div class="align-items-center br-item">
-                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 4"><i class="fas fa-adjust" aria-hidden="true"></i><span class="text">Funcionalidade 4</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-                -->
-
-      <span class="br-divider vertical mx-half mx-sm-1"></span>
-
-      <div> <!-- Botão Entrar / Meu cadastro -->
-        <% if user_signed_in? %>
-          <div class="avatar dropdown-toggle br-button sign-in small" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-user" aria-hidden="true"> </i>Meu cadastro</div>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <% if current_user.admin? %>
-            <%= link_to "Blazer", "#", class: "dropdown-item" %>
-          <% end %>
-            <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        <div class="header-links dropdown">
+          <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido"><i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+          </button>
+          <div class="br-list">
+            <div class="header">
+              <div class="title">Acesso Rápido</div>
+            </div><%= link_to "Adcionar Requerimento", new_requeriment_path, class: "br-item text-decoration-none" %><%= link_to "Meus Requerimentos", requeriments_path, class: "br-item text-decoration-none" %><%= link_to "Controle da Meta", work_periods_path, class: "br-item text-decoration-none" %>
           </div>
-        <% else %>
-          <%= link_to new_user_session_path, class: "br-button sign-in small" do %>
-            <i class="fas fa-user" aria-hidden="true"> </i>Entrar
-          <% end %>
-        <% end %>
-      </div>
+        </div>
+        <!--
+        <span class="br-divider vertical mx-half mx-sm-1"></span>
+        <div class="header-functions dropdown">
+          <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema"><i class="fas fa-th" aria-hidden="true"></i>
+          </button>
+          <div class="br-list">
+            <div class="header">
+              <div class="title">Funcionalidades do Sistema</div>
+            </div>
+            <div class="align-items-center br-item">
+              <button class="br-button circle small" type="button" aria-label="Funcionalidade 1"><i class="fas fa-chart-bar" aria-hidden="true" alt="Controle da Meta"></i><span class="text">Controle da Meta</span>
+              </button>
+            </div>
+            <div class="align-items-center br-item">
+              <button class="br-button circle small" type="button" aria-label="Funcionalidade 2"><i class="fas fa-headset" aria-hidden="true"></i><span class="text">Funcionalidade 2</span>
+              </button>
+            </div>
+            <div class="align-items-center br-item">
+              <button class="br-button circle small" type="button" aria-label="Funcionalidade 3"><i class="fas fa-comment" aria-hidden="true"></i><span class="text">Funcionalidade 3</span>
+              </button>
+            </div>
+            <div class="align-items-center br-item">
+              <button class="br-button circle small" type="button" aria-label="Funcionalidade 4"><i class="fas fa-adjust" aria-hidden="true"></i><span class="text">Funcionalidade 4</span>
+              </button>
+            </div>
+          </div>
+        </div>
+          -->
 
-    </div>
+        <span class="br-divider vertical mx-half mx-sm-1"></span>
+
+        <div class="header-search-trigger">
+          <button class="br-button circle" type="button" aria-label="Abrir Busca" data-toggle="search" data-target=".header-search"><i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div> <!-- Botão Entrar / Meu cadastro -->
+          <% if user_signed_in? %>
+            <div class="avatar dropdown-toggle br-button sign-in small" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-user" aria-hidden="true"> </i>Meu cadastro</div>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <% if current_user.admin? %>
+              <%= link_to "Blazer", "#", class: "dropdown-item" %>
+            <% end %>
+              <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          <% else %>
+            <%= link_to new_user_session_path, class: "br-button sign-in small" do %>
+              <i class="fas fa-user" aria-hidden="true"> </i>Entrar
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="header-bottom">
       <div class="header-menu">
@@ -77,6 +80,18 @@
 
         </div>
       </div>
+      <!-- Pesquisa Trigger
+      <div class="header-search">
+        <div class="br-input has-icon">
+            <label for="searchbox-83160">Texto da pesquisa</label>
+            <input id="searchbox-83160" type="text" placeholder="Pesquisa por protocolo"/>
+            <button class="br-button circle small" type="button" aria-label="Pesquisar"><i class="fas fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+        <button class="br-button circle search-close ml-1" name="commit" type="button" aria-label="Fechar Busca" data-dismiss="search"><i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      -->
     </div>
   </div>
 </header>
@@ -132,7 +147,7 @@
                     <div class="menu-links text-center"><a href="https://www.gov.br/pt-br" target="_blank" class="portal-logo"><%= image_tag("govbr-logo-large.png") %></a></div>
 
                     <div class="menu-info">
-                      <div class="text-center text-down-01">Todo o conteúdo deste site é de acesso restrito a servidores do <strong>Ministério da Agricultura, Pecuária e Abastecimento</strong></div>
+                      <div class="text-center text-down-01">Todo o conteúdo deste site é de acesso restrito a servidores do <strong>Instituto Nacional do Seguro Social</strong></div>
                     </div>
                   </div>
                 </div>

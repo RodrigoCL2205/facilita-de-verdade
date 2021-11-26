@@ -1,20 +1,26 @@
-  <div class="banner-sec bg-primary-darken-02 ">
-    <h3>Requerimento Detalhado</h3>
-  </div>
+  <div class="banner-sec bg-primary-darken-02">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h6 class="ml-2">Tarefa de Protocolo: <%= @requeriment.protocol %> </h6>
+        </div>
+        <div>
+          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+            <i class="fas fa-check"></i>Concluir
+          <% end %>
+          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+            <i class="fas fa-exclamation"></i>Exigência
+          <% end %>
+          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+            <i class="fas fa-layer-group"></i>Subtarefa
+          <% end %>
+        </div>
+      </div>
+    </div>
 
 <div class="container">
   <div class="row mt-2 mb-2 justify-content-around">
     <div class="">
       <%= link_to "Importar Resumo do Benefício", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
-    </div>
-    <div class="">
-      <%= button_to "Registrar Conclusão", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none", type: "button", disabled: true %>
-    </div>
-    <div class="">
-      <%= link_to "Registrar Exigência", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
-    </div>
-    <div class="">
-      <%= link_to "Registrar Subtarefa", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
     </div>
   </div>
 
@@ -76,7 +82,7 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <p class="my-auto"><strong> Detalhes - Outros</strong></p>
+          <p class="my-auto"><strong> Controle da Meta</strong></p>
         </div>
 
         <div class="card-body">

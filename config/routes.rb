@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   # Importação dos dados brutos do Protocolo do requerimento GET que foi ultilizado
   # o método 'POST' ao invés do método 'GET' para enviar mais dados.
   post 'import', to: 'requeriments#new'
+
+  # Rotas para controle da meta
+  resources :work_periods
 end
