@@ -1,4 +1,4 @@
-<header class="br-header small">
+<header class="br-header small " data-sticky>
   <div class="container-lg">
     <div class="header-top">
       <div class="header-logo">
@@ -7,14 +7,46 @@
         <% end %>
       </div>
       <div class="header-actions">
-        <div class="header-links">
-          <div class="d-flex flex-row">
-            <!--
-            <%= link_to "Amostras Processadas", "#", class: "br-item" %>
-            <%= link_to "Amostras Processadas", "#", class: "br-item" %>
-            -->
-          </div>
-        </div><span class="br-divider vertical mx-half mx-sm-1"></span>
+
+              <div class="header-links dropdown">
+                <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido"><i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <div class="br-list">
+                  <div class="header">
+                    <div class="title">Acesso Rápido</div>
+                  </div><%= link_to "Adcionar Requerimento", new_requeriment_path, class: "br-item" %><%= link_to "Meus Requerimentos", requeriments_path, class: "br-item" %><a class="br-item" href="javascript:void(0)">Controle de Meta</a>
+                </div>
+              </div>
+                <!--
+              <span class="br-divider vertical mx-half mx-sm-1"></span>
+              <div class="header-functions dropdown">
+                <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema"><i class="fas fa-th" aria-hidden="true"></i>
+                </button>
+                <div class="br-list">
+                  <div class="header">
+                    <div class="title">Funcionalidades do Sistema</div>
+                  </div>
+                  <div class="align-items-center br-item">
+                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 1"><i class="fas fa-chart-bar" aria-hidden="true" alt="Controle da Meta"></i><span class="text">Controle da Meta</span>
+                    </button>
+                  </div>
+                  <div class="align-items-center br-item">
+                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 2"><i class="fas fa-headset" aria-hidden="true"></i><span class="text">Funcionalidade 2</span>
+                    </button>
+                  </div>
+                  <div class="align-items-center br-item">
+                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 3"><i class="fas fa-comment" aria-hidden="true"></i><span class="text">Funcionalidade 3</span>
+                    </button>
+                  </div>
+                  <div class="align-items-center br-item">
+                    <button class="br-button circle small" type="button" aria-label="Funcionalidade 4"><i class="fas fa-adjust" aria-hidden="true"></i><span class="text">Funcionalidade 4</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+                -->
+
+      <span class="br-divider vertical mx-half mx-sm-1"></span>
 
       <div> <!-- Botão Entrar / Meu cadastro -->
         <% if user_signed_in? %>

@@ -1,3 +1,91 @@
   <div class="banner-sec bg-primary-darken-02 ">
-    <h2>Detalhes do Requerimento <%= @requeriment.protocol %></h2>
+    <h3>Requerimento Detalhado</h3>
   </div>
+
+<div class="container">
+  <div class="row mt-2 mb-2 justify-content-around">
+    <div class="">
+      <%= link_to "Importar Resumo do Benefício", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
+    </div>
+    <div class="">
+      <%= button_to "Registrar Conclusão", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none", type: "button", disabled: true %>
+    </div>
+    <div class="">
+      <%= link_to "Registrar Exigência", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
+    </div>
+    <div class="">
+      <%= link_to "Registrar Subtarefa", requeriments_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+
+        <div class="card-header">
+          <p class="my-auto"><strong>Detalhes do requerimento</strong></p>
+        </div>
+
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+            <li><strong>Serviço: </strong><%= @requeriment.servico %></li>
+            <li><strong>Protocolo: </strong><%= @requeriment.protocol %></li>
+            <li><strong>DER: </strong><%= @requeriment.der.strftime("%d/%m/%Y") %></li>
+            <li><strong>Status: </strong><%= @requeriment.status %></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong> Detalhes do Segurado</strong></p>
+        </div>
+
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+            <li><strong>Nome: </strong><%= @requeriment.insured.name %></li>
+            <li><strong>CPF: </strong><%= @requeriment.insured.cpf %></li>
+            <li><strong>Nome da Mãe: </strong><%= @requeriment.insured.mothers_name %></li>
+            <li><strong>Data de nascimento: </strong> <%= @requeriment.insured.birth_date.strftime("%d/%m/%Y") %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-4">
+      <div class="card">
+
+        <div class="card-header">
+          <p class="my-auto"><strong>Detalhes do Benefício</strong></p>
+        </div>
+
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong> Detalhes - Outros</strong></p>
+        </div>
+
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
