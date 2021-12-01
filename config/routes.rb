@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   # Rotas para controle da meta
   resources :work_periods
+
+  resources :scores, only: [:create, :edit, :update, :destroy]
 end

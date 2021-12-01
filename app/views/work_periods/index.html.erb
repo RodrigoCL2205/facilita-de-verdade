@@ -1,1 +1,73 @@
-gffgfgf
+<div class="banner-sec bg-primary-darken-02">
+        <div>
+          <h3>Controle da Meta</h3>
+        </div>
+      <div class="d-flex justify-content-end align-items-center">
+
+          <%= link_to new_work_period_path, type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+            <i class="fas fa-plus"></i>Adicionar Período de Trabalho
+          <% end %>
+          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+            <i class="fas fa-exclamation"></i>Exigência
+          <% end %>
+          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+            <i class="fas fa-layer-group"></i>Subtarefa
+          <% end %>
+
+      </div>
+    </div>
+
+<div class="container mt-2">
+
+
+  <div class="row">
+
+    <%# Início do CARD de períodos de atividade  %>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong>Períodos de atividade</strong></p>
+        </div>
+
+        <div class="card-body">
+          <div id="table">
+            <table class="table table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Programa </th>
+                  <th>Início do período</th>
+                  <th>Fim do período</th>
+                  <th colspan="2">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <% @work_periods.each do |work_period| %>
+                  <tr>
+                    <td><%= work_period.program %></td>
+                    <td><%= work_period.start_date.strftime("%d/%m/%Y") %></td>
+                    <td><%= work_period.end_date.nil? ? "Ativo" : work_period.end_date.strftime("%d/%m/%Y") %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%# Fim do CARD de Períodos de atividade  %>
+
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong> Detalhes da Meta Mensal</strong></p>
+        </div>
+
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

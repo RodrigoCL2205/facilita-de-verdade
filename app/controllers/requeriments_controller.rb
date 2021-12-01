@@ -8,6 +8,9 @@ class RequerimentsController < ApplicationController
 
   def show
     @requeriment = Requeriment.find(params[:id])
+    @score = Score.new
+    has_some_scores?
+
   end
 
   def new
@@ -105,5 +108,14 @@ class RequerimentsController < ApplicationController
   def import_names_collection
     @collection_all_services = ScoreForService.all.order("servico ASC").distinct.pluck(:servico)
     @collection_all_status = ["Pendente", "Exigência", "Concluída", "Cancelada"]
+  end
+
+  def has_some_scores?
+    # As variáveis @has_conlusao, @has_exigencia e @has_subtarefa são utilizadas
+    # para desabilitar os botões de criar score no view requeriments#show
+    @scores = @requeriment.scores
+    @has_conclusao = @scores.any?{ |score| score.status == 'conclusao' }
+    @has_exigencia = @scores.any?{ |score| score.status == 'exigencia' }
+    @has_subtarefa = @scores.any?{ |score| score.status == 'subtarefa' }
   end
 end

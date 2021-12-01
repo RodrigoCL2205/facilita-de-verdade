@@ -1,0 +1,29 @@
+
+  <div class="banner-sec bg-primary-darken-02">
+    <h3>Alterar data do requerimento</h3>
+  </div>
+
+  <div class="container mt-2">
+    <%# Início Form para criar requerimento @requeriment %>
+    <div class="row justify-content-center m-3">
+
+      <div class="form-group">
+        <%= simple_form_for (@score) do |f| %>
+          <div class="justify-content-center">
+            <div class="row">
+              <div class="mb-1">
+                <%= f.label :date, label: "Data de registro: ", required: true %>
+                <%= f.input :date, as: :string, label: false, input_html: { class: "datepicker", value: @score.date.to_s.strip } %>
+              </div>
+            </div>
+
+            <div class="row form-actions justify-content-between">
+              <%= f.button :submit, "Alterar", class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
+              <%= link_to "Voltar", requeriment_path(@requeriment), class: "br-button secondary mt-3 mt-sm-0 text-decoration-none" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>

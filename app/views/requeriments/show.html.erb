@@ -3,16 +3,95 @@
         <div>
           <h6 class="ml-2">Tarefa de Protocolo: <%= @requeriment.protocol %> </h6>
         </div>
-        <div>
-          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
-            <i class="fas fa-check"></i>Concluir
-          <% end %>
-          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
-            <i class="fas fa-exclamation"></i>Exigência
-          <% end %>
-          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
-            <i class="fas fa-layer-group"></i>Subtarefa
-          <% end %>
+        <div class="d-flex justify-content-end">
+          <%# Início da condional do botão 'concluir' para verificar ser possui %>
+          <%# score com status 'conclusao'. Se possuir, retorna botão disabled, se não, botão ativo %>
+          <div>
+            <% if @has_conclusao %>
+              <%= simple_form_for (@score) do |f| %>
+                <%= f.hidden_field :status, value: "conclusao" %>
+                <%= f.hidden_field :requeriment, value: @requeriment.id %>
+                <%= button_to scores_path, method: 'post', class: "br-button inverted mt-3 mt-sm-0 text-decoration-none",
+                data: { confirm: "Deseja confirmar a conclusão da tarefa?" },
+                disabled: "disabled" do %>
+                  <i class="fas fa-check"></i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= simple_form_for (@score) do |f| %>
+                <%= f.hidden_field :status, value: "conclusao" %>
+                <%= f.hidden_field :requeriment, value: @requeriment.id %>
+                <%= button_to scores_path, method: 'post', class: "br-button inverted mt-3 mt-sm-0 text-decoration-none",
+                data: { confirm: "Deseja confirmar a conclusão da tarefa?" } do %>
+                  <i class="fas fa-check"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+            <div class="br-tooltip" role="tooltip" success="success" place="bottom">
+              <span class="text" role="tooltip">Concluir</span>
+              <span class="subtext">Será contabilizado a pontuação de conclusão do serviço na meta.</span>
+            </div>
+          </div>
+          <%# Fim da condicional do botão 'Concluir' %>
+
+          <%# Início da condional do botão 'exigencia' para verificar ser possui %>
+          <%# score com status 'conclusao' ou 'exigencia'. Se possuir, retorna botão disabled, se não, botão ativo %>
+          <div>
+            <% if @has_conclusao || @has_exigencia %>
+              <%= simple_form_for (@score) do |f| %>
+                <%= f.hidden_field :status, value: "exigencia" %>
+                <%= f.hidden_field :requeriment, value: @requeriment.id %>
+                <%= button_to scores_path, method: 'post', class: "br-button inverted mt-3 mt-sm-0 text-decoration-none",
+                data: { confirm: "Deseja atribuir exigência para a tarefa?" },
+                disabled: 'disabled' do %>
+                  <i class="fas fa-exclamation"></i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= simple_form_for (@score) do |f| %>
+                <%= f.hidden_field :status, value: "exigencia" %>
+                <%= f.hidden_field :requeriment, value: @requeriment.id %>
+                <%= button_to scores_path, method: 'post', class: "br-button inverted mt-3 mt-sm-0 text-decoration-none",
+                data: { confirm: "Deseja atribuir exigência para a tarefa?" } do %>
+                  <i class="fas fa-exclamation"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+            <div class="br-tooltip" role="tooltip" warning="warning" place="bottom">
+              <span class="text" role="tooltip">Exigência</span>
+              <span class="subtext">Será contabilizado a pontuação de exigência do serviço na meta.</span>
+            </div>
+          </div>
+          <%# Fim da condicional do botão 'exigencia' %>
+
+          <%# Início da condional do botão 'subtarefa' para verificar ser possui %>
+          <%# score com status 'conclusao' ou 'subtarefa'. Se possuir, retorna botão disabled, se não, botão ativo %>
+          <div>
+            <% if @has_conclusao || @has_subtarefa %>
+              <%= simple_form_for (@score) do |f| %>
+                <%= f.hidden_field :status, value: "subtarefa" %>
+                <%= f.hidden_field :requeriment, value: @requeriment.id %>
+                <%= button_to scores_path, method: 'post', class: "br-button inverted mt-3 mt-sm-0 text-decoration-none",
+                data: { confirm: "Deseja atribuir subtarefa para a tarefa?" },
+                disabled: 'disabled' do %>
+                  <i class="fas fa-layer-group"></i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= simple_form_for (@score) do |f| %>
+                <%= f.hidden_field :status, value: "subtarefa" %>
+                <%= f.hidden_field :requeriment, value: @requeriment.id %>
+                <%= button_to scores_path, method: 'post', class: "br-button inverted mt-3 mt-sm-0 text-decoration-none",
+                data: { confirm: "Deseja atribuir subtarefa para a tarefa?" } do %>
+                  <i class="fas fa-layer-group"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+            <div class="br-tooltip" role="tooltip" info="info" place="bottom">
+              <span class="text" role="tooltip">Subtarefa</span>
+              <span class="subtext">Será contabilizado a pontuação de subtarefa do serviço na meta.</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -82,16 +161,55 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <p class="my-auto"><strong> Controle da Meta</strong></p>
+          <p class="my-auto"><strong> Controle da Meta - Pontuação contabilizada para este requerimento</strong></p>
         </div>
 
         <div class="card-body">
           <ul class="my-auto list-unstyled">
 
+
+              <div id="table">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Status </th>
+                    <th>Pontuação</th>
+                    <th>Data</th>
+                    <th colspan="2">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+                  <% @requeriment.scores.each do |score| %>
+                    <tr>
+                      <td><%= score.status.capitalize %></td>
+                      <td><%= score.score %></td>
+                      <td><%= score.date.strftime("%d/%m/%Y") %></td>
+                      <td>
+                        <% if policy(score).edit? %>
+                          <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
+                            <i class="fas fa-edit"></i>
+                          <% end %>
+                        <% end %>
+
+                        <% if policy(score).destroy? %>
+                          <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                            <i class="fas fa-trash"></i>
+                          <% end %>
+                        <% end %>
+
+                      </td>
+                  </tr>
+                  <% end %>
+                  <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong><%= @requeriment.scores.map{|item| item.score}.reduce(0, :+).round(2) %></strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </ul>
         </div>
       </div>
     </div>
   </div>
-
 </div>

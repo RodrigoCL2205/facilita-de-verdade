@@ -1,2 +1,3 @@
 class ScoreForService < ApplicationRecord
+
 end
