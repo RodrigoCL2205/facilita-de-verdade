@@ -169,44 +169,44 @@
 
 
               <div id="table">
-              <table class="table table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Status </th>
-                    <th>Pontuação</th>
-                    <th>Data</th>
-                    <th colspan="2">Ações</th>
-                  </tr>
-                </thead>
-                <tbody id="tbody">
-                  <% @requeriment.scores.each do |score| %>
+                <table class="table table-hover">
+                  <thead class="thead-dark">
                     <tr>
-                      <td><%= score.status.capitalize %></td>
-                      <td><%= score.score %></td>
-                      <td><%= score.date.strftime("%d/%m/%Y") %></td>
-                      <td>
-                        <% if policy(score).edit? %>
-                          <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
-                            <i class="fas fa-edit"></i>
+                      <th>Status </th>
+                      <th>Pontuação</th>
+                      <th>Data</th>
+                      <th colspan="2">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody">
+                    <% @requeriment.scores.each do |score| %>
+                      <tr>
+                        <td><%= score.status.capitalize %></td>
+                        <td><%= score.score %></td>
+                        <td><%= score.date.strftime("%d/%m/%Y") %></td>
+                        <td>
+                          <% if policy(score).edit? %>
+                            <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
+                              <i class="fas fa-edit"></i>
+                            <% end %>
                           <% end %>
-                        <% end %>
 
-                        <% if policy(score).destroy? %>
-                          <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
-                            <i class="fas fa-trash"></i>
+                          <% if policy(score).destroy? %>
+                            <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                              <i class="fas fa-trash"></i>
+                            <% end %>
                           <% end %>
-                        <% end %>
 
-                      </td>
-                  </tr>
-                  <% end %>
-                  <tr>
-                    <td><strong>Total</strong></td>
-                    <td><strong><%= @requeriment.scores.map{|item| item.score}.reduce(0, :+).round(2) %></strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <tr>
+                      <td><strong>Total</strong></td>
+                      <td><strong><%= @requeriment.scores.map{|item| item.score}.reduce(0, :+).round(2) %></strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
           </ul>
         </div>
       </div>
