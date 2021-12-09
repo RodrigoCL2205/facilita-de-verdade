@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :requeriments
   has_many :work_periods
+  has_many :licenses
 
   # Recebe como argumento o número referente ao mês através do método Date.today.month
   def scores

@@ -1,0 +1,125 @@
+<div class="banner-sec bg-primary-darken-02">
+  <div>
+    <h3>Meu Cadastro</h3>
+  </div>
+  <div class="d-flex justify-content-end">
+    <%= link_to new_work_period_path, class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+      <i class="fas fa-plus"></i>Adicionar Período de Trabalho
+    <% end %>
+    <%= link_to new_license_path, class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
+      <i class="fas fa-plus"></i>Adicionar Período de Licença
+    <% end %>
+  </div>
+</div>
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong>Meus dados</strong></p>
+        </div>
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+            <li><strong>E-mail: </strong><%= current_user.email %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <%# Início do Card de Períodos de Trabalho %>
+    <div class="col-12 col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong>Períodos de Trabalho (CEAB, PGRP, CEAP)</strong></p>
+        </div>
+        <div class="card-body">
+          <div id="table" class="table-responsive">
+            <table class="table table-hover table-work_periods">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Programa</th>
+                  <th>Início do Período</th>
+                  <th>Fim do Período </th>
+                  <th colspan="2">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <% @work_periods.each do |work_period| %>
+                  <tr>
+                    <td><%= work_period.program %></td>
+                    <td><%= work_period.start_date.strftime("%d/%m/%Y") %></td>
+                    <td><%= work_period.end_date.strftime("%d/%m/%Y") unless work_period.end_date.nil? %></td>
+                    <td>
+                      <% if policy(work_period).edit? %>
+                        <%= link_to edit_work_period_path(work_period), class: "text-primary", title: "Alterar data" do %>
+                          <i class="fas fa-edit"></i>
+                        <% end %>
+                      <% end %>
+
+                      <% if policy(work_period).destroy? %>
+                        <%= link_to work_period_path(work_period), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                          <i class="fas fa-trash"></i>
+                        <% end %>
+                      <% end %>
+
+                    </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%# Fim do Card de Períodos de trabalho %>
+
+    <%# Início do Card de Licença ou Férias %>
+    <div class="col-12 col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong>Períodos de Licença ou Férias</strong></p>
+        </div>
+        <div class="card-body">
+          <div id="table" class="table-responsive">
+            <table class="table table-hover table-work_periods">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Tipo</th>
+                  <th>Início do Período</th>
+                  <th>Fim do Período </th>
+                  <th colspan="2">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <% @licenses.each do |license| %>
+                  <tr>
+                    <td><%= license.tipo %></td>
+                    <td><%= license.start_date.strftime("%d/%m/%Y") %></td>
+                    <td><%= license.end_date.strftime("%d/%m/%Y") unless license.end_date.nil? %></td>
+                    <td>
+                      <% if policy(license).edit? %>
+                        <%= link_to edit_license_path(license), class: "text-primary", title: "Alterar data" do %>
+                          <i class="fas fa-edit"></i>
+                        <% end %>
+                      <% end %>
+
+                      <% if policy(license).destroy? %>
+                        <%= link_to license_path(license), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                          <i class="fas fa-trash"></i>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%# Fim do Card de Licença ou Férias %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.table-scores {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 2px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.table-scores caption{
+  caption-side: top;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 2px;
+}

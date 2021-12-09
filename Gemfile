@@ -65,3 +65,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Pundit - Authorization
 gem 'pundit'
+
+# Date Validator for work_period and leave forms
+gem 'date_validator'

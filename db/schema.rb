@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_154043) do
+ActiveRecord::Schema.define(version: 2021_12_08_124504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2021_11_26_154043) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "discounts", force: :cascade do |t|
+    t.date "date"
+    t.float "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "insureds", force: :cascade do |t|
     t.string "name"
     t.string "cpf"
@@ -57,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_11_26_154043) do
     t.date "birth_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "licenses", force: :cascade do |t|
+    t.string "tipo"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_licenses_on_user_id"
   end
 
   create_table "requeriments", force: :cascade do |t|
@@ -148,6 +165,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_154043) do
   end
 
   add_foreign_key "benefit_summaries", "benefits"
+  add_foreign_key "licenses", "users"
   add_foreign_key "requeriments", "benefits"
   add_foreign_key "requeriments", "insureds"
   add_foreign_key "requeriments", "users"

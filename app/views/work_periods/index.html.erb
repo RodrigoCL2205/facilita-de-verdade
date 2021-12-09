@@ -1,28 +1,12 @@
 <div class="banner-sec bg-primary-darken-02">
-        <div>
-          <h3>Controle da Meta</h3>
-        </div>
-      <div class="d-flex justify-content-end align-items-center">
-
-          <%= link_to new_work_period_path, type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
-            <i class="fas fa-plus"></i>Adicionar Período de Trabalho
-          <% end %>
-          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
-            <i class="fas fa-exclamation"></i>Exigência
-          <% end %>
-          <%= link_to "#", type: "button", class: "br-button inverted mt-3 mt-sm-0 text-decoration-none" do %>
-            <i class="fas fa-layer-group"></i>Subtarefa
-          <% end %>
-
-      </div>
-    </div>
+  <div>
+    <h3>Controle da Meta</h3>
+  </div>
+ </div>
 
 <div class="container mt-2">
-
-
   <div class="row">
-
-    <div class="col mb-4">
+    <div class="col-12 col-lg-4 mb-4">
       <div class="card">
         <div class="card-header">
           <p class="my-auto"><strong> Detalhes da Meta Mensal - <%= localize(Date.today, format: "%B de %Y") %></strong></p>
@@ -34,7 +18,7 @@
             <li>Débito do mês anterior: <strong></strong></li>
             <li>Abono da Meta: <strong></strong></li>
             <li>Meta atualizada: <strong></strong></li>
-            <li>Soma da pontuação até <%= localize(Date.today, fomart: :default) %>: <strong><%= @current_month_score.round(2) %></strong></li>
+            <li>Soma da pontuação até <%= localize(Date.today, fomart: :default) %>: <strong><%= @current_month_score.round(2) unless @current_month_score.nil? %></strong></li>
             <li>Pontos do dia (<%= localize(Date.today, fomart: :default) %>): <strong></strong></li>
             <li>Falta para atingir a meta mensal: <strong></strong></li>
           </ul>
@@ -42,95 +26,52 @@
       </div>
     </div>
 
-    <%# Início do CARD de períodos de atividade  %>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">
-          <p class="my-auto"><strong>Períodos de atividade</strong></p>
-        </div>
-
-        <div class="card-body">
-          <div id="table">
-            <table class="table table-hover">
-              <thead class="thead-dark">
-                <tr>
-                  <th>Programa </th>
-                  <th>Início do período</th>
-                  <th>Fim do período</th>
-                  <th colspan="2">Ações</th>
-                </tr>
-              </thead>
-              <tbody id="tbody">
-                <% @work_periods.each do |work_period| %>
-                  <tr>
-                    <td><%= work_period.program %></td>
-                    <td><%= work_period.start_date.strftime("%d/%m/%Y") %></td>
-                    <td><%= work_period.end_date.nil? ? "Ativo" : work_period.end_date.strftime("%d/%m/%Y") %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <%# Fim do CARD de Períodos de atividade  %>
-  </div>
-
-  <div class="row">
-    <div class="col mb-4">
-      <div class="card">
-        <div class="card-header">
-          <p class="my-auto"><strong> Lista com todos os ponto do mês de <%= localize(Date.today, format: "%B") %></strong></p>
-        </div>
-
-        <div class="card-body">
-          <div id="table">
-                <table class="table table-hover">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th>Tarefa</th>
-                      <th>Serviço</th>
-                      <th>Status </th>
-                      <th>Pontuação</th>
-                      <th>Data</th>
-                      <th colspan="2">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tbody">
-                    <% @current_month_scores.each do |score| %>
-                      <tr>
-                        <td><%= score.requeriment.protocol %></td>
-                        <td><%= score.requeriment.servico %></td>
-                        <td><%= score.status.capitalize %></td>
-                        <td><%= score.score %></td>
-                        <td><%= score.date.strftime("%d/%m/%Y") %></td>
-                        <td>
-                          <% if policy(score).edit? %>
-                            <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
-                              <i class="fas fa-edit"></i>
-                            <% end %>
-                          <% end %>
-
-                          <% if policy(score).destroy? %>
-                            <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
-                              <i class="fas fa-trash"></i>
-                            <% end %>
-                          <% end %>
-
-                        </td>
-                    </tr>
+    <div class="col-12 col-lg-8 mb-4">
+      <div id="table" class="table-responsive">
+        <table class="table table-hover table-scores">
+          <caption class="card-header"><strong> Lista de Pontos do Mês de <%= localize(Date.today, format: "%B") %></strong></caption>
+          <thead class="thead-dark">
+            <tr>
+              <th>Tarefa</th>
+              <th>Serviço</th>
+              <th>Status </th>
+              <th>Pontuação</th>
+              <th>Data</th>
+              <th colspan="2">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <% @current_month_scores.each do |score| %>
+              <tr>
+                <td><%= score.requeriment.protocol %></td>
+                <td><%= score.requeriment.servico %></td>
+                <td><%= score.status.capitalize %></td>
+                <td><%= score.score %></td>
+                <td><%= score.date.strftime("%d/%m/%Y") %></td>
+                <td>
+                  <% if policy(score).edit? %>
+                    <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
+                      <i class="fas fa-edit"></i>
                     <% end %>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td><strong>Total</strong></td>
-                      <td><strong><%= @current_month_scores.map{|item| item.score}.reduce(0, :+).round(2) %></strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-        </div>
+                  <% end %>
+
+                  <% if policy(score).destroy? %>
+                    <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
+                  <% end %>
+
+                </td>
+            </tr>
+            <% end %>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><strong>Total</strong></td>
+              <td><strong><%= @current_month_scores.map{|item| item.score}.reduce(0, :+).round(2) unless @current_month_scores.nil?%></strong></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

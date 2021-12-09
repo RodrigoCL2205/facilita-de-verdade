@@ -59,6 +59,7 @@
             <% if current_user.admin? %>
               <%= link_to "Blazer", "#", class: "dropdown-item" %>
             <% end %>
+              <%= link_to "Meu Cadastro", users_show_path(current_user), class: "dropdown-item" %>
               <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           <% else %>
