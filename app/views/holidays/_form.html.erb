@@ -1,0 +1,45 @@
+<div class="row justify-content-center m-3">
+  <div class="col-12 col-sm-10">
+    <div class="form-group">
+      <%= simple_form_for (@holiday) do |f| %>
+        <div class="row justify-content-between">
+          <div class="mb-2 col-12 col-lg-4">
+            <%= f.label :name, label: "Informar o feriado: ", required: true %>
+            <% if @holiday.name.nil?  %> <%# Verifica se possui data para preenchimento automático %>
+              <%= f.input :name, as: :string, label: false %>
+            <% else %>
+              <%= f.input :name, as: :string, label: false, input_html: { value: @holiday.name } %>
+            <% end %>
+          </div>
+
+          <div class="mb-2 col-12 col-lg-4">
+            <%= f.label :date, label: "Informar data do feriado: ", required: true %>
+            <% if @holiday.date.nil?  %> <%# Verifica se possui data para preenchimento automático %>
+              <%= f.input :date, as: :string, label: false, input_html: { class: "datepicker" } %>
+            <% else %>
+              <%= f.input :date, as: :string, label: false, input_html: { class: "datepicker", value: @holiday.date.strftime("%d/%m/%Y") } %>
+            <% end %>
+          </div>
+          <div class="mb-2 col-4 col-lg-4">
+            <%= f.label :half, label: "Desconto da metade da meta? ", required: true %>
+            <% if @holiday.half = false %>
+              <%= f.input :half , collection: ['Sim', 'Não'], class:"form-control", label: false,
+                        hint: "Informe 'Sim' para descontar somente metade da meta.", selected: 'Sim' %>
+            <% else %>
+            <%= f.input :half , collection: ['Sim', 'Não'], class:"form-control", label: false,
+                        hint: "Informe 'Sim' para descontar somente metade da meta.", selected: 'Não' %>
+            <% end %>
+          </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+          <div class="form-actions">
+            <%= f.button :submit, "Confirmar", class: "br-button primary mt-3 mt-sm-0" %>
+            <%= link_to 'Voltar', users_show_path(current_user), class: 'br-button secondary mt-3 mt-sm-0 text-decoration-none' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

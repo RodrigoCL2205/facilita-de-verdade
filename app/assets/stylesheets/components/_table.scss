@@ -3,6 +3,7 @@
   border-radius: 2px;
   flex-grow: 1;
   width: 100%;
+  background: white;
 }
 
 .table-scores caption{
@@ -10,4 +11,18 @@
   color: black;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 2px;
+}
+
+#table caption {
+  background:rgba(0, 0, 0, 0.03);
+}
+
+.table {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+
+  flex-grow: 1;
+  width: 100%;
+  background: white;
+        border-radius: 5px;
+    box-shadow: 1px 2px 3px #0000002e;
 }

@@ -1,57 +1,64 @@
-  <div class="banner-sec bg-primary-darken-02 ">
+<div class="banner-sec bg-primary-darken-02">
+  <div>
     <h3>Meus Requerimentos</h3>
   </div>
+</div>
 
 <div class="container mt-2">
-
   <div class="row mb-2 justify-content-around">
     <div class="">
       <%= link_to "Novo Requerimento", new_requeriment_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
     </div>
   </div>
+  <div class="card mb-2 p-0">
+    <div class="card-header">
+      <p class="my-auto"><strong> Meus Requerimentos</strong></p>
+    </div>
+    <div class="card-body">
+      <div id="table" class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Protocolo</th>
+              <th>Titular</th>
+              <th>DER</th>
+              <th>Serviço</th>
+              <th>Status</th>
+              <th colspan="2">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <% @requeriments.each do |requeriment| %>
+              <tr>
+                <td>
+                  <%= link_to requeriment_path(requeriment) do %>
+                    <%= requeriment.protocol %>
+                  <% end %>
+                </td>
+                <td><%= requeriment.insured.name %></td>
+                <td><%= requeriment.der.strftime('%d/%m/%Y') %></td>
+                <td><%= requeriment.servico %></td>
+                <td><%= requeriment.status %></td>
 
-  <div id="table">
-    <table class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Protocolo</th>
-          <th>Titular</th>
-          <th>DER</th>
-          <th>Serviço</th>
-          <th>Status</th>
-          <th colspan="2">Ações</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <% @requeriments.each do |requeriment| %>
-          <tr>
-            <td>
-              <%= link_to requeriment_path(requeriment) do %>
-                <%= requeriment.protocol %>
-              <% end %>
-            </td>
-            <td><%= requeriment.insured.name %></td>
-            <td><%= requeriment.der.strftime('%d/%m/%Y') %></td>
-            <td><%= requeriment.servico %></td>
-            <td><%= requeriment.status %></td>
+                <td>
+                  <% if policy(requeriment).edit? %>
+                    <%= link_to edit_requeriment_path(requeriment), class: "text-primary" do %>
+                      <i class="fas fa-edit"></i>
+                    <% end %>
+                  <% end %>
 
-            <td>
-              <% if policy(requeriment).edit? %>
-                <%= link_to edit_requeriment_path(requeriment), class: "text-primary" do %>
-                  <i class="fas fa-edit"></i>
-                <% end %>
-              <% end %>
+                  <% if policy(requeriment).destroy? %>
+                    <%= link_to requeriment_path(requeriment), method: :delete, class: "text-danger",data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                </td>
 
-              <% if policy(requeriment).destroy? %>
-                <%= link_to requeriment_path(requeriment), method: :delete, class: "text-danger",data: { confirm: "Deseja confirmar a exclusão?" } do%>
-                  <i class="fas fa-trash"></i>
-                <% end %>
-              <% end %>
-            </td>
-
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

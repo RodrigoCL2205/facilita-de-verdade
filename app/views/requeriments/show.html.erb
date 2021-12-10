@@ -104,7 +104,7 @@
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-lg-6 mb-2">
       <div class="card">
 
         <div class="card-header">
@@ -113,17 +113,17 @@
 
         <div class="card-body">
           <ul class="my-auto list-unstyled">
-            <li><strong>Serviço: </strong><%= @requeriment.servico %></li>
-            <li><strong>Protocolo: </strong><%= @requeriment.protocol %></li>
-            <li><strong>DER: </strong><%= @requeriment.der.strftime("%d/%m/%Y") %></li>
-            <li><strong>Status: </strong><%= @requeriment.status %></li>
+            <li>Serviço: <strong><%= @requeriment.servico %></strong></li>
+            <li>Protocolo: <strong><%= @requeriment.protocol %></strong></li>
+            <li>DER: <strong><%= @requeriment.der.strftime("%d/%m/%Y") %></strong></li>
+            <li>Status: <strong><%= @requeriment.status %></strong></li>
           </ul>
         </div>
 
       </div>
     </div>
 
-    <div class="col mb-4">
+    <div class="col-12 col-lg-6 mb-2">
       <div class="card">
         <div class="card-header">
           <p class="my-auto"><strong> Detalhes do Segurado</strong></p>
@@ -131,10 +131,10 @@
 
         <div class="card-body">
           <ul class="my-auto list-unstyled">
-            <li><strong>Nome: </strong><%= @requeriment.insured.name %></li>
-            <li><strong>CPF: </strong><%= @requeriment.insured.cpf %></li>
-            <li><strong>Nome da Mãe: </strong><%= @requeriment.insured.mothers_name %></li>
-            <li><strong>Data de nascimento: </strong> <%= @requeriment.insured.birth_date.strftime("%d/%m/%Y") %></li>
+            <li>Nome: <strong><%= @requeriment.insured.name %></strong></li>
+            <li>CPF: <strong><%= @requeriment.insured.cpf %></strong></li>
+            <li>Nome da Mãe: <strong><%= @requeriment.insured.mothers_name %></strong></li>
+            <li>Data de nascimento: <strong><%= @requeriment.insured.birth_date.strftime("%d/%m/%Y") %></strong></li>
           </ul>
         </div>
       </div>
@@ -142,7 +142,7 @@
   </div>
 
   <div class="row">
-    <div class="col mb-4">
+    <div class="col-12 col-lg-6 mb-2">
       <div class="card">
 
         <div class="card-header">
@@ -158,7 +158,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="col-12 col-lg-6 mb-2">
       <div class="card">
         <div class="card-header">
           <p class="my-auto"><strong> Controle da Meta - Pontuação contabilizada para este requerimento</strong></p>
@@ -168,7 +168,7 @@
           <ul class="my-auto list-unstyled">
 
 
-              <div id="table">
+              <div id="table" class="table-responsive">
                 <table class="table table-hover">
                   <thead class="thead-dark">
                     <tr>
@@ -182,7 +182,7 @@
                     <% @requeriment.scores.each do |score| %>
                       <tr>
                         <td><%= score.status.capitalize %></td>
-                        <td><%= score.score %></td>
+                        <td><%= number_two_decimals(score.score) %></td>
                         <td><%= score.date.strftime("%d/%m/%Y") %></td>
                         <td>
                           <% if policy(score).edit? %>
@@ -202,7 +202,7 @@
                     <% end %>
                     <tr>
                       <td><strong>Total</strong></td>
-                      <td><strong><%= @requeriment.scores.map{|item| item.score}.reduce(0, :+).round(2) %></strong></td>
+                      <td><strong><%= number_two_decimals(@requeriment.scores.map{|item| item.score}.reduce(0, :+).round(2)) %></strong></td>
                     </tr>
                   </tbody>
                 </table>

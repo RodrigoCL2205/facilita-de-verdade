@@ -26,14 +26,14 @@
 
   </head>
 
-  <body>
+  <body class="body">
     <div class="template-base">
     <%= render 'shared/navbarDS' %>
     <%= render 'shared/flashes' %>
 
       <%= yield %>
 
-  <%= render "shared/footer" %>
+    <%= render "shared/footer" %>
   </div>
   </body>
   <%= javascript_pack_tag 'import_gov' %>

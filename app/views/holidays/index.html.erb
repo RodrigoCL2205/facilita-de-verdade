@@ -1,0 +1,55 @@
+<div class="banner-sec bg-primary-darken-02">
+  <div>
+    <h3>Todos os Feriados</h3>
+  </div>
+</div>
+
+<div class="container mt-2">
+  <div class="row mb-2 justify-content-around">
+    <div class="">
+      <%= link_to "Novo Feriado", new_holiday_path, class: "br-button primary mt-3 mt-sm-0 text-decoration-none" %>
+    </div>
+  </div>
+  <div class="card mb-2 p-0">
+    <div class="card-header">
+      <p class="my-auto"><strong> Feriados</strong></p>
+    </div>
+    <div class="card-body">
+      <div id="table" class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Feriado</th>
+              <th>Data</th>
+              <th>Tipo de Desconto</th>
+              <th colspan="2">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <% @holidays.each do |holiday| %>
+              <tr>
+                <td><%= holiday.name %></td>
+                <td><%= holiday.date.strftime('%d/%m/%Y') %></td>
+                <td><%= holiday.half == true ? 'Metade' : 'Inteiro' %></td>
+                <td>
+                  <% if policy(holiday).edit? %>
+                    <%= link_to edit_holiday_path(holiday), class: "text-primary" do %>
+                      <i class="fas fa-edit"></i>
+                    <% end %>
+                  <% end %>
+
+                  <% if policy(holiday).destroy? %>
+                    <%= link_to holiday_path(holiday), method: :delete, class: "text-danger",data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                </td>
+
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

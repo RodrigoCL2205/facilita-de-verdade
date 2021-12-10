@@ -2,11 +2,19 @@
   <div>
     <h3>Controle da Meta</h3>
   </div>
- </div>
+</div>
 
 <div class="container mt-2">
+  <%# Se não possuir período de trabalho, aparecerá alerta %>
+  <% if @work_periods == [] %>
+    <div class="alert alert-danger" role="alert">
+      Usuário não possui período de trabalho cadastrado.
+      Para realizar o cadastro,  <%= link_to "clique aqui", users_show_path(current_user) %>.
+    </div>
+  <% end %>
+
   <div class="row">
-    <div class="col-12 col-lg-4 mb-4">
+    <div class="col-12 col-lg-6 mb-4">
       <div class="card">
         <div class="card-header">
           <p class="my-auto"><strong> Detalhes da Meta Mensal - <%= localize(Date.today, format: "%B de %Y") %></strong></p>
@@ -14,64 +22,82 @@
 
         <div class="card-body">
           <ul class="my-auto list-unstyled">
-            <li>Meta mensal: <strong></strong></li>
+            <li>Meta mensal bruta: <strong><%= number_two_decimals(@meta_mensal) %></strong></li>
             <li>Débito do mês anterior: <strong></strong></li>
-            <li>Abono da Meta: <strong></strong></li>
-            <li>Meta atualizada: <strong></strong></li>
-            <li>Soma da pontuação até <%= localize(Date.today, fomart: :default) %>: <strong><%= @current_month_score.round(2) unless @current_month_score.nil? %></strong></li>
-            <li>Pontos do dia (<%= localize(Date.today, fomart: :default) %>): <strong></strong></li>
-            <li>Falta para atingir a meta mensal: <strong></strong></li>
+            <li>Abono da meta: <strong></strong></li>
+            <li>Meta líquida (descontado o abono): <strong></strong></li>
+            <li>Soma da pontuação até <%= localize(Date.today, fomart: :default) %>: <strong><%= number_two_decimals(@current_month_score) unless @current_month_score.nil? %></strong></li>
+            <li>Falta para atingir a meta mensal: <strong><%= number_two_decimals(@falta_meta_mensal) unless @falta_meta_mensal.nil? %></strong></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="col-12 col-lg-8 mb-4">
-      <div id="table" class="table-responsive">
-        <table class="table table-hover table-scores">
-          <caption class="card-header"><strong> Lista de Pontos do Mês de <%= localize(Date.today, format: "%B") %></strong></caption>
-          <thead class="thead-dark">
-            <tr>
-              <th>Tarefa</th>
-              <th>Serviço</th>
-              <th>Status </th>
-              <th>Pontuação</th>
-              <th>Data</th>
-              <th colspan="2">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="tbody">
-            <% @current_month_scores.each do |score| %>
-              <tr>
-                <td><%= score.requeriment.protocol %></td>
-                <td><%= score.requeriment.servico %></td>
-                <td><%= score.status.capitalize %></td>
-                <td><%= score.score %></td>
-                <td><%= score.date.strftime("%d/%m/%Y") %></td>
-                <td>
-                  <% if policy(score).edit? %>
-                    <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
-                      <i class="fas fa-edit"></i>
-                    <% end %>
-                  <% end %>
+    <div class="col-12 col-lg-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong> Detalhes da Meta Diária - <%= localize(Date.today, format: "%d de %B de %Y") %></strong></p>
+        </div>
 
-                  <% if policy(score).destroy? %>
-                    <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
-                      <i class="fas fa-trash"></i>
-                    <% end %>
-                  <% end %>
+        <div class="card-body">
+          <ul class="my-auto list-unstyled">
+            <li>Meta diária: <strong><%= number_two_decimals(@meta_mensal) %></strong></li>
+            <li>Pontos no dia (<%= localize(Date.today, fomart: :default) %>): <strong><%= number_two_decimals(@current_day_score) %></strong></li>
+            <li>Soma da pontuação esperada em (<%= localize(Date.today, fomart: :default) %>): <strong></strong></li>
+            <li>Falta para atingir meta esperada em (<%= localize(Date.today, fomart: :default) %>): <strong></strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                </td>
-            </tr>
-            <% end %>
-            <tr>
-              <td></td>
-              <td></td>
-              <td><strong>Total</strong></td>
-              <td><strong><%= @current_month_scores.map{|item| item.score}.reduce(0, :+).round(2) unless @current_month_scores.nil?%></strong></td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <p class="my-auto"><strong> Lista de Pontos do Mês de <%= localize(Date.today, format: "%B") %></strong></p>
+        </div>
+        <div class="card-body">
+          <div id="table" class="table-responsive">
+            <table class="table table-hover table-scores">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Tarefa</th>
+                  <th>Serviço</th>
+                  <th>Status </th>
+                  <th>Pontuação</th>
+                  <th>Data</th>
+                  <th colspan="2">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <% @array_current_month_scores.each do |score| %>
+                  <tr>
+                    <td><%= score.requeriment.protocol %></td>
+                    <td><%= score.requeriment.servico %></td>
+                    <td><%= score.status.capitalize %></td>
+                    <td><%= number_two_decimals(score.score) %></td>
+                    <td><%= score.date.strftime("%d/%m/%Y") %></td>
+                    <td>
+                      <% if policy(score).edit? %>
+                        <%= link_to edit_score_path(score), class: "text-primary", title: "Alterar data" do %>
+                          <i class="fas fa-edit"></i>
+                        <% end %>
+                      <% end %>
+
+                      <% if policy(score).destroy? %>
+                        <%= link_to score_path(score), method: :delete, class: "text-danger", title: "Deletar", data: { confirm: "Deseja confirmar a exclusão?" } do%>
+                          <i class="fas fa-trash"></i>
+                        <% end %>
+                      <% end %>
+
+                    </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
